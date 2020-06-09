@@ -1,10 +1,11 @@
 import React, { useState } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
-import { Card } from '@material-ui/core';
+import { Card, Button, Grid } from '@material-ui/core';
 import CardHeader from '@material-ui/core/CardHeader';
 import Avatar from '@material-ui/core/Avatar';
 import MoreVertIcon from '@material-ui/icons/MoreVert';
 import IconButton from '@material-ui/core/IconButton';
+import AssistentClassCard from './AssistentClassCard';
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -62,7 +63,8 @@ export default function VideoCard(){
         <div className={classes.divstyle}>
             {
                 videos.map(video => (
-                    <Card className={classes.cardroot}>
+                        <Grid>
+                        <Card className={classes.cardroot}>
                         <CardHeader
                         avatar={
                             <Avatar 
@@ -82,15 +84,22 @@ export default function VideoCard(){
                     />
                     <center>
                         <iframe 
-                            width="640" 
+                            width="95%" 
                             height="360" 
                             frameborder="0" 
                             src={video} 
                             allowfullscreen >teste</iframe>
                     </center>
                     </Card>
+   
+                    </Grid>
+                    
                 ))
             }
+            <Button variant="contained">Back</Button>
+            <Button variant="contained" color="primary">
+                Next
+            </Button>
         </div>
         
     )
