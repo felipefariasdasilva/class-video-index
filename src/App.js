@@ -12,7 +12,7 @@ const useStyles = makeStyles((theme) => ({
   root: {
     flexGrow: 1,
     backgroundColor: "lightgrey",
-    height: "100vh",
+    height: "100%",
   },
   menuButton: {
     marginRight: theme.spacing(2),
@@ -57,8 +57,10 @@ export default function App() {
         </Toolbar>
       </AppBar>
 
-      <h1>Videos</h1>
-      <VideoCard />
+      <center>
+        <h1>Videos</h1>
+        <VideoCard />
+      </center>
 
     </div>
   );
