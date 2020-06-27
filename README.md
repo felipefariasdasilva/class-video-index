@@ -1,6 +1,6 @@
 # Indexador de Videoaula
 
-Um parágrafo simples dando uma descrição sobre o projeto 
+Projeto para indexar videos em playlists. Podendo assim criar roteiros de aulas e acompanhar o progresso.
 
 ## Começando
 
