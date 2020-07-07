@@ -1,12 +1,15 @@
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
-import AppBar from '@material-ui/core/AppBar';
-import Toolbar from '@material-ui/core/Toolbar';
-import Typography from '@material-ui/core/Typography';
-import Button from '@material-ui/core/Button';
-import IconButton from '@material-ui/core/IconButton';
-import MenuIcon from '@material-ui/icons/Menu';
 import VideoCard from './VideoCard';
+import AssistentClassCard from './AssistentClassCard';
+import { Grid } from '@material-ui/core';
+import Header from './Header';
+import VideoProvider from './VideoProvider';
+import { useEffect } from 'react';
+import VideoContext, { useVideoContext } from './VideoContext';
+import { useContext } from 'react';
+import VideoClass from './VideoClass';
+import SelectedClassProvider from './SelectedClassProvider';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -42,26 +45,24 @@ const useStyles = makeStyles((theme) => ({
 
 export default function App() {
   const classes = useStyles();
+  const { setVideo } = useContext(VideoContext)
 
   return (
-    <div className={classes.root}>
-      <AppBar position="static">
-        <Toolbar>
-          <IconButton edge="start" className={classes.menuButton} color="inherit" aria-label="menu">
-            <MenuIcon />
-          </IconButton>
-          <Typography variant="h6" className={classes.title}>
-            Aulas Online
-          </Typography>
-          <Button color="inherit">Login</Button>
-        </Toolbar>
-      </AppBar>
-
+    <VideoProvider>
+      <SelectedClassProvider>
+       <div className={classes.root}>
+      <Header />
+      
       <center>
         <h1>Videos</h1>
-        <VideoCard />
+
+       <VideoClass/>
+        
       </center>
 
     </div>
+    </SelectedClassProvider>
+    </VideoProvider>
+   
   );
 }

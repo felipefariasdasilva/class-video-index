@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import { Card, Button, Grid } from '@material-ui/core';
 import CardHeader from '@material-ui/core/CardHeader';
@@ -6,6 +6,9 @@ import Avatar from '@material-ui/core/Avatar';
 import MoreVertIcon from '@material-ui/icons/MoreVert';
 import IconButton from '@material-ui/core/IconButton';
 import AssistentClassCard from './AssistentClassCard';
+import { useVideoContext } from './VideoContext';
+import SelectedClassContext, { useSelectedClassContext } from './SelectedClassContext';
+import { useEffect } from 'react';
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -21,7 +24,8 @@ const useStyles = makeStyles((theme) => ({
     },
     cardroot: {
       maxWidth: 700,
-      margin: 10
+      marginBottom: '3%'
+
     },
     media: {
       height: 0,
@@ -45,7 +49,10 @@ const useStyles = makeStyles((theme) => ({
 export default function VideoCard(){
 
     const classes = useStyles();
-
+    const video = useVideoContext()
+    const { setSelectedClass } = useContext(SelectedClassContext)
+    const actualClass = useSelectedClassContext()
+    const[selectedVideo, setSelectedVideo] = useState(0)
     const [videos,setVideos] = useState(
         [ 
             "https://mega.nz/embed/GVg0DIzJ#ah3P-iXjXkYKfWayGkutHxTUMM6l4wTk9EiZ5PhKG1Y",
@@ -57,12 +64,28 @@ export default function VideoCard(){
         ]
     )
 
- 
+    const handleNextClick = () => {
+      console.log("next")
+      setSelectedClass({
+        actualClass: selectedVideo + 1
+      })
+      console.log("card: ", actualClass);
+      setSelectedVideo(selectedVideo + 1)
+    }
+
+    const handleBackClick = () => {
+      console.log("next")
+      setSelectedClass({
+        actualClass: selectedVideo - 1
+      })
+      console.log(actualClass);
+      setSelectedVideo(actualClass)
+    }
+    
+    useEffect(()=>{},[actualClass])
       
     return(
         <div className={classes.divstyle}>
-            {
-                videos.map(video => (
                         <Grid>
                         <Card className={classes.cardroot}>
                         <CardHeader
@@ -79,27 +102,29 @@ export default function VideoCard(){
                                 <MoreVertIcon />
                             </IconButton>
                         }
-                        title="Next Level Week"
-                        subheader="by Rocketseat"
+                        title={ video.title[actualClass] }
+                        subheader="Next Level Week by Rocketseat"
                     />
                     <center>
                         <iframe 
                             width="95%" 
                             height="360" 
                             frameborder="0" 
-                            src={video} 
-                            allowfullscreen >teste</iframe>
+                            src={videos[selectedVideo]} 
+                            allowfullscreen 
+                        >
+                          teste
+                        </iframe>
                     </center>
                     </Card>
    
                     </Grid>
-                    
-                ))
-            }
-            <Button variant="contained">Back</Button>
-            <Button variant="contained" color="primary">
-                Next
-            </Button>
+            
+            <div style={{justifyContent: 'space-between'}}>
+            <Button variant="contained" onClick={handleBackClick}>Back</Button>
+            <Button variant="contained" color="primary" onClick={handleNextClick}>Next</Button>
+            </div>
+            
         </div>
         
     )
