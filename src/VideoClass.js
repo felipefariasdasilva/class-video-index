@@ -9,49 +9,12 @@ import VideoContext, { useVideoContext } from './VideoContext';
 import { useContext } from 'react';
 import SelectedClassContext from './SelectedClassContext';
 
-const useStyles = makeStyles((theme) => ({
-  root: {
-    flexGrow: 1,
-    backgroundColor: "lightgrey",
-    height: "100%",
-  },
-  menuButton: {
-    marginRight: theme.spacing(2),
-  },
-  title: {
-    flexGrow: 1,
-  },
-  cardroot: {
-    maxWidth: 700,
-    margin: 10
-  },
-  media: {
-    height: 0,
-    paddingTop: '56.25%', // 16:9
-  },
-  expand: {
-    transform: 'rotate(0deg)',
-    marginLeft: 'auto',
-    transition: theme.transitions.create('transform', {
-      duration: theme.transitions.duration.shortest,
-    }),
-  },
-  expandOpen: {
-    transform: 'rotate(180deg)',
-  },
-}));
-
-
 export default function VideoClass(){
-    const classes = useStyles();
     const { setVideo } = useContext(VideoContext)
     const { setSelectedClass } = useContext(SelectedClassContext)
 
     useEffect(()=>{
-        console.log("set initial videos")
-        setSelectedClass({
-          actualClass: 0
-        })
+               
         setVideo(
           {
             id: 1,
@@ -70,7 +33,7 @@ export default function VideoClass(){
                 "https://mega.nz/embed/3F4DDTTC#Hu2S0x54Mwpv-hN0XFsq8UkSBxk5FlSwmJbIlAwWMUc",
             ]
           })
-      }, [setVideo, setSelectedClass])
+      }, [setVideo])
 
     return(
         <Grid container>
